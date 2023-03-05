@@ -1,0 +1,69 @@
+
+install_cask() {
+    if brew list $1 &>/dev/null; then
+        echo "${1} is already installed"
+    else    
+        brew install --cask $1 && echo "$1 is installed"
+    fi
+}
+
+brew_install_cask() {
+    local arr=("$@")
+    
+    for element in "${arr[@]}"; do
+        install_cask "$element"
+    done
+}
+
+function switchPhp() {    
+    formula=$(getPhpVersion "${1}")
+    echo "$formula"
+
+    if [ "8.2" == "${1}"]              
+    then
+        stopPhpVersion "8.1"
+        startPhpVersion "8.2"
+    else
+        stopPhpVersion "8.2"
+        startPhpVersion "8.1"
+    fi
+
+    composer global update
+
+    echo ""
+    echo "Restarting nginx, just to be sure!"
+    sudo brew services restart nginx
+    echo "Restarted nginx"
+}
+
+function stopPhpVersion() {
+    formula=$(getPhpVersion "${1}")
+    echo "$formula unlinking and stoping service..."
+
+    brew unlink "$formula"
+    sudo brew services stop "$formula"
+
+    echo "Unlinked and stoped for $formula"
+}
+
+function startPhpVersion() {
+    formula=$(getPhpVersion "${1}")
+    echo "$formula linking and starting service..."
+
+    brew link "$formula" --overwrite --force
+    sudo brew services start "$formula"
+
+    echo "Linked and started for $formula"
+}
+
+function getPhpVersion() {
+    brewPhpalias="8.2";
+    if [ "$brewPhpalias" == "${1}" ]
+    then
+        echo "php"
+    else
+        echo "php@${1}"
+    fi
+}
+
+switchPhp 8.2

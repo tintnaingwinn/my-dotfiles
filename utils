@@ -1,0 +1,25 @@
+#!/bin/bash
+
+brew_install() {    
+    if brew list $1 &>/dev/null; then
+        echo "${1} is already installed"
+    else
+        brew install $1 && echo "$1 is installed"
+    fi
+}
+
+install_cask() {
+    if brew list $1 &>/dev/null; then
+        echo "${1} is already installed"
+    else    
+        brew install --cask $1 && echo "$1 is installed"
+    fi
+}
+
+brew_install_cask() {
+    local arr=("$@")
+    
+    for element in "${arr[@]}"; do
+        install_cask "$element"
+    done
+}
