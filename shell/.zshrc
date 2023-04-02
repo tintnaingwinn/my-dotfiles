@@ -1,12 +1,7 @@
-# Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
 ZSH_CUSTOM=$HOME/.dotfiles/misc/oh-my-zsh-custom
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
 ZSH_THEME="amuse"
 
 # Hide username in prompt
@@ -64,6 +59,7 @@ export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
 # Android Studio
 export PATH=~/Library/Android/sdk/tools:$PATH
 export PATH=~/Library/Android/sdk/platform-tools:$PATH
+
 # Composer
 export PATH=$PATH:~/.composer/vendor/bin
 
@@ -76,3 +72,9 @@ export PATH=/Users/Shared/DBngin/postgresql/14.3/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+## [Completion] 
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /Users/tintnaingwin/.dart-cli-completion/zsh-config.zsh ]] && . /Users/tintnaingwin/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
